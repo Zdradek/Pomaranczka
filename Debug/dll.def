@@ -1,0 +1,39 @@
+EXPORTS
+    JRz @1 DATA
+    JoYAct @2 DATA
+    Jx @3 DATA
+    Jxt @4 DATA
+    Jy @5 DATA
+    Jyt @6 DATA
+    Jz @7 DATA
+    SCREEN @8 DATA
+    SCREENBUF @9 DATA
+    TimerIsrPeriod @10 DATA
+    _Z10SystemInitv @11
+    _Z11ClearScreenv @12
+    _Z11DataPreparev @13
+    _Z11DrawObjectsv @14
+    _Z11RegisterSetRVmm @15
+    _Z14RegisterAccessRVmmm @16
+    _Z19PrintDiagnosticInfov @17
+    _Z6getKeyv @18
+    _Z8TimerIsrv @19
+    _Z8UpdateIOv @20
+    _Z8checkKeyi @21
+    credits @22 DATA
+    dx @23 DATA
+    dy @24 DATA
+    frame_count @25 DATA
+    gRawKeys @26 DATA
+    gucModifiers @27 DATA
+    main @28
+    mode @29 DATA
+    presc @30 DATA
+    randi @31 DATA
+    randr @32
+    s @33 DATA
+    stage @34 DATA
+    x @35 DATA
+    xt @36 DATA
+    y @37 DATA
+    yt @38 DATA

@@ -1,2 +1,0 @@
-# Pomaranczka
-Wizyjne projekt
