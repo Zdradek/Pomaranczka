@@ -22,6 +22,7 @@
 #include "utilities.h"
 #include "peripherals.h"
 #include "Drone.h"
+#include "Plansza.h"
 
 extern struct JoY JoYAct;
 int UpdateIO();
