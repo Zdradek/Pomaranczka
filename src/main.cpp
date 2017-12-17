@@ -65,7 +65,7 @@ void TimerIsr() {
 	unsigned short Key= getKey();
 	if(presc2==100){
 		drone.fly(Key);
-		drone.setCoordinates((long)presc);
+		drone.setCoordinates((double)presc/1000);
 		//8 will end the session
 		if(Key==KEY_Pressed_8) {
 			reset=1;

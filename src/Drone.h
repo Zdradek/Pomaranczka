@@ -124,7 +124,7 @@ public:
   * @param time - time stamp for each pos_x & pos_y read
   * @return nothing
   */
-    void setCoordinates(const long &time);
+    void setCoordinates(const double &time);
     
 /**
   * @brief Function to write coordinates to file

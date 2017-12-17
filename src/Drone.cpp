@@ -17,14 +17,18 @@ void Drone::setSpeed(const std::size_t &speed) {
     this -> speed = speed;
 }
 
-void Drone::setCoordinates(const long &time){
+void Drone::setCoordinates(const double &time){
     Txtparams params;
     std::stringstream time_s;
     time_s << time;
     std::stringstream pos[2];
     pos[0] << this -> pos_x;
-    pos[1] << this -> pos_y;
+    pos[1] << BOARD_MAX_HEIGHT - this -> pos_y - getHeight();
     params.time = time_s.str();
+    std::size_t dot_pos;
+    if((dot_pos = params.time.find(".")) != std::string::npos){
+    	params.time.replace(params.time.begin() + dot_pos, params.time.begin() + dot_pos + 1, ",");
+    }
     params.pos_x = pos[0].str();
     params.pos_y = pos[1].str();
     this -> coordinates.push_back(params);
