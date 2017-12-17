@@ -10,8 +10,8 @@
 #ifndef Drone_HPP
 #define Drone_HPP
 
-#define BOARD_MAX_WIDTH 480
-#define BOARD_MAX_HEIGHT 640
+#define BOARD_MAX_WIDTH 640
+#define BOARD_MAX_HEIGHT 480
 
 #define KEY_Pressed_0 0x62
 #define KEY_Pressed_1 0x59
@@ -29,6 +29,8 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
+#include <string.h>
 #include <fstream>
 
 struct Txtparams{
@@ -57,8 +59,8 @@ private:
     
 public:
 
-    const std::size_t centerOfGravity_x=width/2;
-    const std::size_t centerOfGravity_y=height/2;
+    static const std::size_t centerOfGravity_x=width/2;
+    static const std::size_t centerOfGravity_y=height/2;
     std::size_t pos_x;
     std::size_t pos_y;
 /**
@@ -122,7 +124,7 @@ public:
   * @param time - time stamp for each pos_x & pos_y read
   * @return nothing
   */
-    void setCoordinates(const long &time);
+    void setCoordinates(const double &time);
     
 /**
   * @brief Function to write coordinates to file

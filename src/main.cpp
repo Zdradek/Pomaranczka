@@ -8,9 +8,10 @@
 
 char credits[51]="        RPiLAB                DEMO                ";
 long TimerIsrPeriod = 1;            //czas podany w milisekundach
-
+std::string consoleInfromation;
 int reset = 0;
 Drone drone;
+Plansza plansza;
 unsigned long* SCREEN;
 unsigned long SCREENBUF[640 * 480];
 int mode = 0;
@@ -19,6 +20,7 @@ int frame_count = 0;
 
 int main(void) {
 	if (SystemInit())		return EXIT_HALT;
+	strncpy(credits, "", sizeof(credits));
 	drone.setSpeed(5);
 	while (1) {
 		if (UpdateIO())	return 0;
@@ -26,19 +28,22 @@ int main(void) {
 		Synchronize();
 		ClearScreen();
 		unsigned long* GRAPH = SCREENBUF;
-        if(!reset) {
-            drone.printDrone(GRAPH);
-        }
-        else {
-            std::size_t writeSucceded=drone.WriteToFile();
-            if(writeSucceded);
-            reset=0;
-        //    drone.pos_x=300;
-       //     drone.pos_y=BOARD_MAX_HEIGHT-drone.getHeight();
-       //     drone.pos_y=200;
-        }
+		if(!reset) {
+			plansza.printPlansza(GRAPH);
+			drone.printDrone(GRAPH);
+		} else {
+			if(drone.WriteToFile()){
+				std::string saveInfo = "Data saved to file";
+				strncpy(credits, saveInfo.c_str(), sizeof(credits));
+			} else {
+				std::string saveInfo = "Failed to save to file";
+				strncpy(credits, saveInfo.c_str(), sizeof(credits));
+			}
+			reset=0;
+			drone.pos_x=BOARD_MAX_WIDTH-drone.getWidth();
+			drone.pos_y=BOARD_MAX_HEIGHT-drone.getHeight();
+		}
 		if (JoYAct.ButtonStates & BUTTON_SELECT) continue;
-
 	}
 }
 
@@ -48,6 +53,7 @@ void DataPrepare(){
 }
 void TimerIsr() {
 	presc++;
+	presc2++;
 	if ((presc / 250) % 2)
 		RegisterSet(GPSET1, 1 << (35 - 32));
 	else
@@ -58,6 +64,8 @@ void TimerIsr() {
 		RegisterSet(GPCLR1, 1 << (47 - 32));
 	unsigned short Key= getKey();
 	if(presc2==100){
+		drone.fly(Key);
+		drone.setCoordinates((double)presc/1000);
 		//8 will end the session
 		if(Key==KEY_Pressed_8) {
 			reset=1;
@@ -84,7 +92,7 @@ void PrintDiagnosticInfo() {
 	frame_count++;
 
 	char strbuf[1000];
-	sprintf(strbuf,"%i: %i, %x\r\n",frame_count,getKey(), JoYAct.ButtonStates);
+	sprintf(strbuf,"%s\r\n", credits);
 	if((frame_count%20)==0) StringUart(strbuf);
 }
 
